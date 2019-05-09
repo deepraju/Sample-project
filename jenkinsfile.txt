@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+tools { 
+        maven 'M2_HOME' 
+    }
+    stages {
+     stage('Initializing') {
+        
+            steps {
+             echo 'initialize..'
+             
+            	
+            }
+        }
+        stage('Build') {
+        
+            steps {
+                echo 'Building..'
+                sh '${M2_HOME}/bin/mvn clean install'
+                
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+                 
+                 sh 'scp -i StrictHostKeyChecking=no /var/lib/jenkins/workspace/aws-dev-job/target/spring-mvc-example.war /home/ec2-user/test'
+              
+            }
+            }
+             stage('Finsihed') {
+            steps {
+                echo 'Compedlet....'
+              
+            }
+        }
+               stage('Completed') {
+            steps {
+                echo 'Compedlet....'
+              
+            }
+        }
+    }
+}
+
+
+
+
